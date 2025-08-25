@@ -1,0 +1,30 @@
+{
+  "name": "swt-documentation",
+  "version": "1.0.0",
+  "description": "Custom API Documentation Generator",
+  "main": "bin/cli.js",
+  "scripts": {
+    "start": "node bin/cli.js"
+  },
+  "bin": {
+    "swt-docs": "./bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "template"
+  ],
+  "engines": {
+    "node": ">=14"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SPOTWEBDEV/swt-documentation.git"
+  },
+  "keywords": ["api", "docs", "documentation"],
+  "author": "SPOTWEB TECH",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SPOTWEBDEV/swt-documentation/issues"
+  },
+  "homepage": "https://github.com/SPOTWEBDEV/swt-documentation#readme"
+}

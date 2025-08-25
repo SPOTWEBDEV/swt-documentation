@@ -1,0 +1,29 @@
+[
+  {
+    "category": "Auth",
+    "title": "Login",
+    "path": "/auth/login",
+    "method": "POST",
+    "summary": "Login user",
+    "requestBody": "{ email, password }",
+    "authorization": false,
+    "responseSuccess": "{ \"status\": \"success\", \"token\": \"jwt_token_here\", \"user\": { \"id\": 1, \"name\": \"John Doe\", \"email\": \"john@example.com\" } }",
+    "responseError": [
+      { "status": "error", "message": "Invalid email" },
+      { "status": "error", "message": "Password is required" }
+    ]
+  },
+  {
+    "category": "User",
+    "title": "Get Profile",
+    "path": "/user/profile",
+    "method": "GET",
+    "summary": "Get user profile",
+    "requestBody": "-",
+    "authorization": true,
+    "responseSuccess": "{ \"id\": 1, \"name\": \"John Doe\", \"email\": \"john@example.com\" }",
+    "responseError": [
+      { "status": "error", "message": "User not found" }
+    ]
+  }
+]

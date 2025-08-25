@@ -1,0 +1,94 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* script.css */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+h1 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.group {
+    margin-bottom: 2rem;
+}
+
+.group h2 {
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.endpoint {
+    background: white;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.endpoint h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.endpoint p {
+    font-size: 0.9rem;
+}
+
+.category {
+  margin-bottom: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.endpoint-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  padding: 1rem 1.5rem;
+  flex: 1 1 250px;
+  transition: transform 0.2s ease;
+}
+
+.endpoint-card:hover {
+  transform: translateY(-5px);
+}
+
+.endpoint-card .method {
+  display: inline-block;
+  background: #e0e7ff;
+  color: #3730a3;
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.endpoint-card .path {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.endpoint-card .summary {
+  font-size: 0.9rem;
+  color: #555;
+}

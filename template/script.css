@@ -1,94 +1,193 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-/* script.css */
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 2rem;
-}
+* {
+            box-sizing: border-box;
+        }
 
-h1 {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: #1f2937;
+        }
 
-.group {
-    margin-bottom: 2rem;
-}
+        /* Layout */
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
 
-.group h2 {
-    color: var(--secondary-color);
-    border-bottom: 2px solid var(--primary-color);
-    padding-bottom: 0.5rem;
-    margin-bottom: 1rem;
-}
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: #ffffff;
+            border-right: 1px solid #e5e7eb;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+        }
 
-.endpoint {
-    background: white;
-    padding: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    margin-bottom: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
+        .sidebar h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
 
-.endpoint h3 {
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-}
+        .search-box {
+            display: flex;
+            margin-bottom: 20px;
+        }
 
-.endpoint p {
-    font-size: 0.9rem;
-}
+        .search-box input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
 
-.category {
-  margin-bottom: 2rem;
-}
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
 
-h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
+        .sidebar ul li {
+            margin-bottom: 12px;
+        }
 
-.cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #374151;
+            font-size: 0.95rem;
+            display: block;
+            padding: 6px 8px;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+        }
 
-.endpoint-card {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  padding: 1rem 1.5rem;
-  flex: 1 1 250px;
-  transition: transform 0.2s ease;
-}
+        .sidebar ul li a:hover,
+        .sidebar ul li a.active {
+            background-color: #e5f6ff;
+            color: #0d6efd;
+        }
 
-.endpoint-card:hover {
-  transform: translateY(-5px);
-}
+        /* Main content */
+        .main-content {
+            flex: 1;
+            padding: 50px 40px;
+        }
 
-.endpoint-card .method {
-  display: inline-block;
-  background: #e0e7ff;
-  color: #3730a3;
-  font-weight: bold;
-  padding: 0.25rem 0.5rem;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  margin-bottom: 0.5rem;
-}
+        .main-content h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
 
-.endpoint-card .path {
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-}
+        .main-content p {
+            font-size: 1rem;
+            color: #6b7280;
+            margin-bottom: 40px;
+        }
 
-.endpoint-card .summary {
-  font-size: 0.9rem;
-  color: #555;
-}
+        /* Card grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .card svg {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 15px;
+            fill: #4f46e5;
+        }
+
+        .card h3 {
+            margin: 0 0 10px;
+            font-size: 18px;
+            color: #111827;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 10px;
+        }
+
+        .api-path {
+            background: #eef2ff;
+            color: #4f46e5;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        .api-method {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+            color: #fff;
+            background: #10b981;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 5px;
+            position: absolute;
+            padding: 10px 15px;
+            top: 20px;
+            right: 20px;
+        }
+
+        button {
+            background-color: #10b981;
+            color: #ffffff;
+            border: none;
+            padding: 15px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .request,
+        .response {
+            font-size: 12px;
+            background: #f3f4f6;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 5px;
+            word-break: break-word;
+        }
+
+        .response.success {
+            background: #d1fae5;
+            color: #065f46;
+            margin-bottom: 10px;
+        }
+
+        .response.error {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .response ul {
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }

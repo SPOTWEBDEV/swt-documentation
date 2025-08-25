@@ -212,15 +212,16 @@
                 <input type="text" id="search-input" placeholder="Search...">
             </div>
             <ul id="category-list">
-                
+
             </ul>
         </aside>
 
 
         <!-- Main Content -->
         <main class="main-content">
-            <h1>Documentation</h1>
-            <p>Meet the next generation of documentation. AI-native, beautiful out-of-the-box, and built for developers.
+            <h1 class="title">Documentation</h1>
+            <p class="description">Meet the next generation of documentation. AI-native, beautiful out-of-the-box, and
+                built for developers.
             </p>
 
             <!-- Card Grid -->
@@ -232,90 +233,133 @@
         </main>
     </div>
     <script>
-        let currentCategory = 'All'; // Default category
+        document.addEventListener("DOMContentLoaded", () => {
+            const container = document.getElementById("cards-container");
+            const categoryList = document.getElementById("category-list");
+            const searchInput = document.getElementById("search-input");
+            const titleEl = document.querySelector(".title");
+            const descEl = document.querySelector(".description");
 
-        fetch('endpoints.json')
-            .then(res => res.json())
-            .then(data => {
-                const categoryList = document.getElementById('category-list');
-                const searchInput = document.getElementById('search-input');
-                const container = document.getElementById('cards-container');
+            if (!container) {
+                console.error("cards-container not found!");
+                return;
+            }
 
-                // Extract unique categories
-                let categories = [...new Set(data.map(api => api.category))];
-                categories.unshift('All'); // Add "All" at the beginning
+            let currentCategory = "All"; // default category
 
-                // Render categories in the sidebar
-                function renderCategories(filteredCategories) {
-                    categoryList.innerHTML = '';
-                    filteredCategories.forEach(cat => {
-                        const li = document.createElement('li');
-                        const a = document.createElement('a');
-                        a.href = "#";
-                        a.textContent = cat;
-                        if (cat === currentCategory) a.classList.add('active');
+            fetch("endpoints.json")
+                .then(res => res.json())
+                .then(data => {
+                    const endpoints = Array.isArray(data.endpoints) ? data.endpoints : [];
 
-                        a.addEventListener('click', () => {
-                            currentCategory = cat;
-                            renderCategories(categories); // Refresh active state
-                            renderCards(); // Show cards of selected category
-                        });
+                    // Set dynamic title and description
+                    titleEl.textContent = data.meta?.title || "Documentation";
+                    descEl.textContent = data.meta?.description || "";
 
-                        li.appendChild(a);
-                        categoryList.appendChild(li);
-                    });
-                }
+                    // Extract unique categories
+                    let categories = [...new Set(endpoints.map(api => api.category))];
+                    categories.unshift("All");
 
-                // Render API cards by category
-                function renderCards() {
-                    container.innerHTML = '';
-                    const filteredData = currentCategory === 'All' ? data : data.filter(api => api.category === currentCategory);
+                    // Render sidebar categories
+                    function renderCategories(filteredCategories) {
+                        categoryList.innerHTML = "";
 
-                    filteredData.forEach(api => {
-                        const card = document.createElement('div');
-                        card.classList.add('card');
+                        filteredCategories.forEach(cat => {
+                            const li = document.createElement("li");
+                            const a = document.createElement("a");
+                            a.href = "#";
+                            a.textContent = cat;
 
-                        // Handle multiple error responses
-                        let errorHtml = '';
-                        if (Array.isArray(api.responseError)) {
-                            errorHtml = '<ul>';
-                            api.responseError.forEach(err => {
-                                errorHtml += `<li>${JSON.stringify(err)}</li>`;
+                            if (cat.toLowerCase() === currentCategory.toLowerCase()) {
+                                a.classList.add("active");
+                            }
+
+                            a.addEventListener("click", () => {
+                                currentCategory = cat;
+                                renderCategories(filteredCategories); // update active class
+                                renderCards();
+
+                                // Smooth scroll to first card
+                                const firstCard = document.querySelector(`.card[data-category='${cat}']`);
+                                if (firstCard) firstCard.scrollIntoView({ behavior: "smooth" });
                             });
-                            errorHtml += '</ul>';
-                        } else {
-                            errorHtml = api.responseError;
+
+                            li.appendChild(a);
+                            categoryList.appendChild(li);
+                        });
+                    }
+
+                    // Render API cards based on currentCategory
+                    function renderCards() {
+                        container.innerHTML = ""; // clear previous cards
+
+                        const filteredData =
+                            currentCategory.toLowerCase() === "all"
+                                ? endpoints
+                                : endpoints.filter(api => api.category.toLowerCase() === currentCategory.toLowerCase());
+
+                        if (!Array.isArray(filteredData) || filteredData.length === 0) {
+                            container.innerHTML = "<p>No APIs found in this category.</p>";
+                            return;
                         }
 
-                        card.innerHTML = `
-                <h3>${api.title}</h3>
-                <p class="description">${api.summary}</p>
-                <span class="api-method">${api.method}</span>
-                <div class="api-path">${api.path}</div>
+                        filteredData.forEach(api => {
+                            const card = document.createElement("div");
+                            card.classList.add("card");
+                            card.setAttribute("data-category", api.category);
 
-                ${api.requestBody && api.requestBody !== '-' ? `<div class="request"><strong>Request:</strong><br>${api.requestBody}</div>` : ''}
-                ${api.authorization ? `<div class="authorization"><strong>Authorization:</strong><br>Bearer token</div>` : ''}
+                            // Handle multiple error responses
+                            let errorHtml = "";
+                            if (Array.isArray(api.responseError)) {
+                                errorHtml = "<ul>";
+                                api.responseError.forEach(err => {
+                                    errorHtml += `<li>${JSON.stringify(err)}</li>`;
+                                });
+                                errorHtml += "</ul>";
+                            } else {
+                                errorHtml = api.responseError;
+                            }
 
-                <div class="response success"><strong>Response (Success):</strong><br>${api.responseSuccess}</div>
-                <div class="response error"><strong>Response (Error):</strong><br>${errorHtml}</div>
+                            card.innerHTML = `
+            <h3>${api.title}</h3>
+            <p class="description">${api.summary}</p>
+            <span class="api-method">${api.method}</span>
+            <div class="api-path">${api.path}</div>
 
-                <button>Code</button>
-            `;
-                        container.appendChild(card);
+            ${api.requestBody && api.requestBody !== '-' ? `<div class="request"><strong>Request:</strong><br>${api.requestBody}</div>` : ''}
+            ${api.authorization ? `<div class="authorization"><strong>Authorization:</strong><br>Bearer token</div>` : ''}
+
+            <div class="response success"><strong>Response (Success):</strong><br>${api.responseSuccess}</div>
+            <div class="response error"><strong>Response (Error):</strong><br>${errorHtml}</div>
+
+            <button>Code</button>
+          `;
+
+                            container.appendChild(card);
+                        });
+                    }
+
+                    // Initial render
+                    renderCategories(categories);
+                    renderCards();
+
+                    // Search input filtering
+                    searchInput.addEventListener("input", e => {
+                        const query = e.target.value.toLowerCase();
+                        const filtered = categories.filter(cat => cat.toLowerCase().includes(query));
+
+                        // Reset currentCategory if it no longer exists
+                        if (!filtered.some(cat => cat.toLowerCase() === currentCategory.toLowerCase())) {
+                            currentCategory = "All";
+                        }
+
+                        renderCategories(filtered);
+                        renderCards();
                     });
-                }
+                })
+                .catch(err => console.error("Failed to load endpoints.json:", err));
+        });
 
-                // Initial render
-                renderCategories(categories);
-                renderCards();
-
-                // Search input filtering
-                searchInput.addEventListener('input', e => {
-                    const query = e.target.value.toLowerCase();
-                    const filtered = categories.filter(cat => cat.toLowerCase().includes(query));
-                    renderCategories(filtered);
-                });
-            });
     </script>
 
 

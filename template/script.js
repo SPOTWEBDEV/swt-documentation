@@ -1,61 +1,68 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const container = document.getElementById("docs-container");
+fetch("endpoints.json")
+  .then(res => res.json())
+  .then(data => {
+    const endpoints = Array.isArray(data.endpoints) ? data.endpoints : [];
 
-  if (!container) {
-    console.error("docs-container not found!");
-    return;
-  }
+    // ... then use `endpoints` everywhere
+    let currentCategory = "All";
 
-  // Load endpoints.json
-  fetch("./endpoints.json")
-    .then((res) => res.json())
-    .then((endpoints) => {
-      renderDocs(endpoints, container);
-    })
-    .catch((err) => console.error("Error loading endpoints:", err));
-});
+    const categoryList = document.getElementById("category-list");
+    const container = document.getElementById("cards-container");
+    const searchInput = document.getElementById("search-input");
+    const titleEl = document.querySelector(".title");
+    const descEl = document.querySelector(".description");
 
-/**
- * Renders endpoints grouped by category
- * @param {Array} endpoints - Array of endpoint objects
- * @param {HTMLElement} container - DOM container to render into
- */
-function renderDocs(endpoints, container) {
-  container.innerHTML = "";
+    // Set meta dynamically
+    titleEl.textContent = data.meta?.title || "Documentation";
+    descEl.textContent = data.meta?.description || "";
 
-  const grouped = endpoints.reduce((acc, ep) => {
-    const category = ep.category || "Default";
-    if (!acc[category]) acc[category] = [];
-    acc[category].push(ep);
-    return acc;
-  }, {});
+    // Extract unique categories
+    let categories = [...new Set(endpoints.map(api => api.category))];
+    categories.unshift("All");
 
-  for (const [category, eps] of Object.entries(grouped)) {
-    const categoryEl = document.createElement("div");
-    categoryEl.className = "category";
+    function renderCards() {
+      container.innerHTML = "";
+      const filteredData = currentCategory === "All"
+        ? endpoints
+        : endpoints.filter(api => api.category === currentCategory);
 
-    const title = document.createElement("h2");
-    title.textContent = category;
-    categoryEl.appendChild(title);
+      if (!Array.isArray(filteredData) || filteredData.length === 0) {
+        container.innerHTML = "<p>No APIs found in this category.</p>";
+        return;
+      }
 
-    const cardsContainer = document.createElement("div");
-    cardsContainer.className = "cards-container";
+      filteredData.forEach(api => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.setAttribute("data-category", api.category);
 
-    eps.forEach((ep) => {
-      const card = document.createElement("div");
-      card.className = "endpoint-card";
+        // Handle multiple error responses
+        let errorHtml = '';
+        if (Array.isArray(api.responseError)) {
+          errorHtml = '<ul>';
+          api.responseError.forEach(err => {
+            errorHtml += `<li>${JSON.stringify(err)}</li>`;
+          });
+          errorHtml += '</ul>';
+        } else {
+          errorHtml = api.responseError;
+        }
 
-      card.innerHTML = `
-        <span class="method">${ep.method.toUpperCase()}</span>
-        <h3 class="path">${ep.path}</h3>
-        <p class="summary">${ep.summary || "-"}</p>
-      `;
+        card.innerHTML = `
+          <h3>${api.title}</h3>
+          <p class="description">${api.summary}</p>
+          <span class="api-method">${api.method}</span>
+          <div class="api-path">${api.path}</div>
+          ${api.requestBody && api.requestBody !== '-' ? `<div class="request"><strong>Request:</strong><br>${api.requestBody}</div>` : ''}
+          ${api.authorization ? `<div class="authorization"><strong>Authorization:</strong><br>Bearer token</div>` : ''}
+          <div class="response success"><strong>Response (Success):</strong><br>${api.responseSuccess}</div>
+          <div class="response error"><strong>Response (Error):</strong><br>${errorHtml}</div>
+          <button>Code</button>
+        `;
+        container.appendChild(card);
+      });
+    }
 
-      cardsContainer.appendChild(card);
-    });
-
-    categoryEl.appendChild(cardsContainer);
-    container.appendChild(categoryEl);
-  }
-}
-
+    // Continue with renderCategories, search, etc...
+  })
+  .catch(err => console.error("Failed to load endpoints.json:", err));

@@ -1,0 +1,9 @@
+documentation/
+*.log
+temp/       
+*.tmp
+.DS_Store
+node_modules/
+dist/
+.env
+.vscode/

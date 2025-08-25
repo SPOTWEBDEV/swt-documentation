@@ -7,10 +7,37 @@
   <link rel="stylesheet" href="./global.css">
   <!-- Internal locked CSS -->
   <link rel="stylesheet" href="../node_modules/swt-documentation/template/script.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>API Documentation</h1>
-  <div id="docs-container"></div>
+  
+  <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Documentation</h2>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Search...">
+            </div>
+            <ul id="category-list">
+                
+            </ul>
+        </aside>
+
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1 class="title" >Documentation</h1>
+            <p class="description">Meet the next generation of documentation. AI-native, beautiful out-of-the-box, and built for developers.
+            </p>
+
+            <!-- Card Grid -->
+            <div class="card-grid" id="cards-container">
+
+
+
+            </div>
+        </main>
+    </div>
 
   <!-- Internal JS -->
   <script src="../node_modules/swt-documentation/template/script.js"></script>

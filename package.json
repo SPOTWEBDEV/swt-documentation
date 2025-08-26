@@ -1,6 +1,6 @@
 {
   "name": "swt-documentation",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Custom API Documentation Generator",
   "main": "bin/cli.js",
   "scripts": {
@@ -21,7 +21,11 @@
     "type": "git",
     "url": "git+https://github.com/SPOTWEBDEV/swt-documentation.git"
   },
-  "keywords": ["api", "docs", "documentation"],
+  "keywords": [
+    "api",
+    "docs",
+    "documentation"
+  ],
   "author": "SPOTWEB TECH",
   "license": "ISC",
   "bugs": {

@@ -1,6 +1,6 @@
 {
   "name": "swt-documentation",
-  "version": "1.2.0",
+  "version": "1.1.0",
   "description": "Custom API Documentation Generator",
   "main": "bin/cli.js",
   "scripts": {

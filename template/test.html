@@ -252,6 +252,8 @@
                 .then(data => {
                     const endpoints = Array.isArray(data.endpoints) ? data.endpoints : [];
 
+                    console.log(data.meta.title)
+
                     // Set dynamic title and description
                     titleEl.textContent = data.meta?.title || "Documentation";
                     descEl.textContent = data.meta?.description || "";

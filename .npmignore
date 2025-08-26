@@ -1,0 +1,15 @@
+node_modules
+.git
+*.log
+test/
+docs/
+documentation/
+temp/
+*.tmp
+.DS_Store
+dist/
+.env
+.vscode/
+coverage/
+documentation
+downloads.js

@@ -7,3 +7,6 @@ node_modules/
 dist/
 .env
 .vscode/
+node_modules
+documentation
+downloads.js

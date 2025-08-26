@@ -41,14 +41,6 @@
 
   <!-- Internal JS -->
   <script src="../node_modules/swt-documentation/template/script.js"></script>
-  <script>
-    // Load endpoints dynamically from endpoints.json
-    fetch('./endpoints.json')
-      .then(res => res.json())
-      .then(data => {
-        window.renderDocs(data); // Provided by script.js
-      })
-      .catch(err => console.error(err));
-  </script>
+
 </body>
 </html>

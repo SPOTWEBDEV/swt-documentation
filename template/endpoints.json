@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Documentation",
+    "title": "Documentation By SWT",
     "description": "Meet the next generation of documentation. AI-native, beautiful out-of-the-box, and built for developers."
   },
   "endpoints": [
@@ -19,6 +19,34 @@
       ]
     },
     {
+      "category": "Auth",
+      "title": "Register",
+      "path": "/auth/register",
+      "method": "POST",
+      "summary": "Register a new user",
+      "requestBody": "{ name, email, password }",
+      "authorization": false,
+      "responseSuccess": "{ \"status\": \"success\", \"token\": \"jwt_token_here\", \"user\": { \"id\": 2, \"name\": \"Jane Doe\", \"email\": \"jane@example.com\" } }",
+      "responseError": [
+        { "status": "error", "message": "Email already exists" },
+        { "status": "error", "message": "Password too weak" }
+      ]
+    },
+    {
+      "category": "Auth",
+      "title": "Change Password",
+      "path": "/auth/change-password",
+      "method": "POST",
+      "summary": "Change user password",
+      "requestBody": "{ oldPassword, newPassword }",
+      "authorization": true,
+      "responseSuccess": "{ \"status\": \"success\", \"message\": \"Password updated successfully\" }",
+      "responseError": [
+        { "status": "error", "message": "Old password is incorrect" },
+        { "status": "error", "message": "New password must be at least 8 characters" }
+      ]
+    },
+    {
       "category": "User",
       "title": "Get Profile",
       "path": "/user/profile",
@@ -29,6 +57,84 @@
       "responseSuccess": "{ \"id\": 1, \"name\": \"John Doe\", \"email\": \"john@example.com\" }",
       "responseError": [
         { "status": "error", "message": "User not found" }
+      ]
+    },
+    {
+      "category": "User",
+      "title": "Edit Profile",
+      "path": "/user/profile/edit",
+      "method": "PUT",
+      "summary": "Update user profile",
+      "requestBody": "{ name, email, avatar }",
+      "authorization": true,
+      "responseSuccess": "{ \"status\": \"success\", \"message\": \"Profile updated\", \"user\": { \"id\": 1, \"name\": \"John Doe\", \"email\": \"john@example.com\" } }",
+      "responseError": [
+        { "status": "error", "message": "Invalid email format" }
+      ]
+    },
+    {
+      "category": "Admin",
+      "title": "Login",
+      "path": "/admin/login",
+      "method": "POST",
+      "summary": "Login admin user",
+      "requestBody": "{ email, password }",
+      "authorization": false,
+      "responseSuccess": "{ \"status\": \"success\", \"token\": \"jwt_token_here\", \"admin\": { \"id\": 1, \"name\": \"Admin User\" } }",
+      "responseError": [
+        { "status": "error", "message": "Invalid credentials" }
+      ]
+    },
+    {
+      "category": "Admin",
+      "title": "Fetch All Users",
+      "path": "/admin/users",
+      "method": "GET",
+      "summary": "Get a list of all users",
+      "requestBody": "-",
+      "authorization": true,
+      "responseSuccess": "[ { \"id\": 1, \"name\": \"John Doe\", \"email\": \"john@example.com\" }, { \"id\": 2, \"name\": \"Jane Doe\", \"email\": \"jane@example.com\" } ]",
+      "responseError": [
+        { "status": "error", "message": "Unauthorized" }
+      ]
+    },
+    {
+      "category": "Admin",
+      "title": "Fetch All Deposits",
+      "path": "/admin/deposits",
+      "method": "GET",
+      "summary": "Get all deposit transactions",
+      "requestBody": "-",
+      "authorization": true,
+      "responseSuccess": "[ { \"id\": 1, \"user_id\": 1, \"amount\": 100, \"status\": \"completed\" } ]",
+      "responseError": [
+        { "status": "error", "message": "Unauthorized" }
+      ]
+    },
+    {
+      "category": "Admin",
+      "title": "Fetch All Payments",
+      "path": "/admin/payments",
+      "method": "GET",
+      "summary": "Get all payment transactions",
+      "requestBody": "-",
+      "authorization": true,
+      "responseSuccess": "[ { \"id\": 1, \"user_id\": 1, \"amount\": 50, \"status\": \"completed\" } ]",
+      "responseError": [
+        { "status": "error", "message": "Unauthorized" }
+      ]
+    },
+    {
+      "category": "Other",
+      "title": "Ping Server",
+      "path": "/ping",
+      "method": "GET",
+      "summary": "Ping server to check status",
+      "requestBody": "-",
+      "authorization": false,
+      "responseSuccess": "{ \"status\": \"success\", \"message\": \"Server is running\" }",
+      "responseError": [
+        { "status": "error", "message": "Server unavailable" }
       ]
     }
   ]

@@ -11,6 +11,7 @@
   },
   "files": [
     "bin",
+    "README.md",
     "template"
   ],
   "engines": {

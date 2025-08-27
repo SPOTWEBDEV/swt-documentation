@@ -1,8 +1,9 @@
 {
   "name": "swt-documentation",
-  "version": "1.1.0",
+  "version": "1.2.1",
   "description": "Custom API Documentation Generator",
-  "main": "bin/cli.js",
+  "main": "lib/serveDocs.js",
+  "type": "module",
   "scripts": {
     "start": "node bin/cli.js"
   },
@@ -11,8 +12,9 @@
   },
   "files": [
     "bin",
-    "README.md",
-    "template"
+    "lib",
+    "template",
+    "README.md"
   ],
   "engines": {
     "node": ">=14"

@@ -1,46 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>API Documentation</title>
   <!-- User editable global.css -->
   <link rel="stylesheet" href="./global.css">
   <!-- Internal locked CSS -->
-  <link rel="stylesheet" href="../node_modules/swt-documentation/template/script.css">
+  <link rel="stylesheet" href="./script.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
-  
+
   <div class="container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <h2>Documentation</h2>
-            <div class="search-box">
-                <input type="text" id="search-input" placeholder="Search...">
-            </div>
-            <ul id="category-list">
-                
-            </ul>
-        </aside>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>Documentation</h2>
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Search Categories">
+      </div>
+      <ul id="category-list">
 
+      </ul>
+    </aside>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <h1 class="title" >Documentation</h1>
-            <p class="description">Meet the next generation of documentation. AI-native, beautiful out-of-the-box, and built for developers.
-            </p>
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1 class="title">Documentation</h1>
+      <p class="description">Meet the next generation of documentation. AI-native, beautiful out-of-the-box, and
+        built for developers.
+      </p>
 
-            <!-- Card Grid -->
-            <div class="card-grid" id="cards-container">
+      <input type="text" name="request" id="search-input" placeholder="Search Request">
 
+      <!-- Card Grid -->
+      <div class="card-grid" id="cards-container">
 
+      </div>
+    </main>
 
-            </div>
-        </main>
+    <!-- Popup Modal -->
+    <div id="codeModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>Code Example</h2>
+
+        <label for="codeSelect">Choose Language:</label>
+        <select id="codeSelect">
+          <option value="node">Node.js (Axios)</option>
+          <option value="jquery">jQuery AJAX</option>
+          <option value="fetch">JavaScript Fetch</option>
+          <option value="xhr">XMLHttpRequest</option>
+          <option value="python">Python (requests)</option>
+        </select>
+
+        <pre><code id="codeOutput">// Code will appear here...</code></pre>
+      </div>
     </div>
 
+  </div>
+
   <!-- Internal JS -->
-  <script src="../node_modules/swt-documentation/template/script.js"></script>
+  <script src="./script.js"></script>
 
 </body>
+
 </html>

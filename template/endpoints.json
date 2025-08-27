@@ -1,6 +1,7 @@
 {
   "meta": {
     "title": "Documentation By SWT",
+    "header": "Backend Api Documentation By SWT",
     "description": "Meet the next generation of documentation. AI-native, beautiful out-of-the-box, and built for developers."
   },
   "endpoints": [
@@ -14,8 +15,14 @@
       "authorization": false,
       "responseSuccess": "{ \"status\": \"success\", \"token\": \"jwt_token_here\", \"user\": { \"id\": 1, \"name\": \"John Doe\", \"email\": \"john@example.com\" } }",
       "responseError": [
-        { "status": "error", "message": "Invalid email" },
-        { "status": "error", "message": "Password is required" }
+        {
+          "status": "error",
+          "message": "Invalid email"
+        },
+        {
+          "status": "error",
+          "message": "Password is required"
+        }
       ]
     },
     {
@@ -28,8 +35,14 @@
       "authorization": false,
       "responseSuccess": "{ \"status\": \"success\", \"token\": \"jwt_token_here\", \"user\": { \"id\": 2, \"name\": \"Jane Doe\", \"email\": \"jane@example.com\" } }",
       "responseError": [
-        { "status": "error", "message": "Email already exists" },
-        { "status": "error", "message": "Password too weak" }
+        {
+          "status": "error",
+          "message": "Email already exists"
+        },
+        {
+          "status": "error",
+          "message": "Password too weak"
+        }
       ]
     },
     {
@@ -42,8 +55,14 @@
       "authorization": true,
       "responseSuccess": "{ \"status\": \"success\", \"message\": \"Password updated successfully\" }",
       "responseError": [
-        { "status": "error", "message": "Old password is incorrect" },
-        { "status": "error", "message": "New password must be at least 8 characters" }
+        {
+          "status": "error",
+          "message": "Old password is incorrect"
+        },
+        {
+          "status": "error",
+          "message": "New password must be at least 8 characters"
+        }
       ]
     },
     {
@@ -56,7 +75,10 @@
       "authorization": true,
       "responseSuccess": "{ \"id\": 1, \"name\": \"John Doe\", \"email\": \"john@example.com\" }",
       "responseError": [
-        { "status": "error", "message": "User not found" }
+        {
+          "status": "error",
+          "message": "User not found"
+        }
       ]
     },
     {
@@ -69,7 +91,10 @@
       "authorization": true,
       "responseSuccess": "{ \"status\": \"success\", \"message\": \"Profile updated\", \"user\": { \"id\": 1, \"name\": \"John Doe\", \"email\": \"john@example.com\" } }",
       "responseError": [
-        { "status": "error", "message": "Invalid email format" }
+        {
+          "status": "error",
+          "message": "Invalid email format"
+        }
       ]
     },
     {
@@ -82,7 +107,10 @@
       "authorization": false,
       "responseSuccess": "{ \"status\": \"success\", \"token\": \"jwt_token_here\", \"admin\": { \"id\": 1, \"name\": \"Admin User\" } }",
       "responseError": [
-        { "status": "error", "message": "Invalid credentials" }
+        {
+          "status": "error",
+          "message": "Invalid credentials"
+        }
       ]
     },
     {
@@ -95,7 +123,10 @@
       "authorization": true,
       "responseSuccess": "[ { \"id\": 1, \"name\": \"John Doe\", \"email\": \"john@example.com\" }, { \"id\": 2, \"name\": \"Jane Doe\", \"email\": \"jane@example.com\" } ]",
       "responseError": [
-        { "status": "error", "message": "Unauthorized" }
+        {
+          "status": "error",
+          "message": "Unauthorized"
+        }
       ]
     },
     {
@@ -108,7 +139,10 @@
       "authorization": true,
       "responseSuccess": "[ { \"id\": 1, \"user_id\": 1, \"amount\": 100, \"status\": \"completed\" } ]",
       "responseError": [
-        { "status": "error", "message": "Unauthorized" }
+        {
+          "status": "error",
+          "message": "Unauthorized"
+        }
       ]
     },
     {
@@ -121,7 +155,10 @@
       "authorization": true,
       "responseSuccess": "[ { \"id\": 1, \"user_id\": 1, \"amount\": 50, \"status\": \"completed\" } ]",
       "responseError": [
-        { "status": "error", "message": "Unauthorized" }
+        {
+          "status": "error",
+          "message": "Unauthorized"
+        }
       ]
     },
     {
@@ -134,7 +171,10 @@
       "authorization": false,
       "responseSuccess": "{ \"status\": \"success\", \"message\": \"Server is running\" }",
       "responseError": [
-        { "status": "error", "message": "Server unavailable" }
+        {
+          "status": "error",
+          "message": "Server unavailable"
+        }
       ]
     }
   ]

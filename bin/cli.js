@@ -14,23 +14,16 @@ if (!fs.existsSync(docsDir)) {
   fs.mkdirSync(docsDir);
 }
 
-// Copy index.html
-fs.copyFileSync(
-  path.join(__dirname, "../template/index.html"),
-  path.join(docsDir, "index.html")
-);
+// Copy only editable files
+const editableFiles = ["global.css", "endpoints.json"];
 
-// Copy only global.css (editable by user)
-fs.copyFileSync(
-  path.join(__dirname, "../template/global.css"),
-  path.join(docsDir, "global.css")
-);
-
-// Copy endpoints.json (editable by user if needed)
-fs.copyFileSync(
-  path.join(__dirname, "../template/endpoints.json"),
-  path.join(docsDir, "endpoints.json")
-);
+editableFiles.forEach(file => {
+  fs.copyFileSync(
+    path.join(__dirname, "../template", file),
+    path.join(docsDir, file)
+  );
+});
 
 console.log("✅ Documentation folder created at:", docsDir);
 console.log("👉 Edit endpoints.json to add your API endpoints.");
+console.log("👉 Edit global.css to customize styles.");

@@ -1,10 +1,9 @@
-* {
+ * {
             box-sizing: border-box;
         }
 
         body {
             margin: 0;
-            font-family: 'Inter', sans-serif;
             background-color: #f8f9fa;
             color: #1f2937;
         }
@@ -21,8 +20,9 @@
             background-color: #ffffff;
             border-right: 1px solid #e5e7eb;
             padding: 20px;
-            position: sticky;
+            position: fixed;
             top: 0;
+            height: 100vh;
         }
 
         .sidebar h2 {
@@ -36,7 +36,7 @@
             margin-bottom: 20px;
         }
 
-        .search-box input {
+        input {
             flex: 1;
             padding: 8px 12px;
             border: 1px solid #d1d5db;
@@ -73,6 +73,9 @@
         .main-content {
             flex: 1;
             padding: 50px 40px;
+            width: calc(100% - 250px);
+            position: absolute;
+            right: 0;
         }
 
         .main-content h1 {
@@ -90,7 +93,7 @@
         /* Card grid */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
         }
 
@@ -142,7 +145,7 @@
             text-transform: uppercase;
             font-size: 12px;
             color: #fff;
-            background: #10b981;
+            background: var(--primary-color);
             padding: 2px 6px;
             border-radius: 4px;
             margin-left: 5px;
@@ -153,7 +156,7 @@
         }
 
         button {
-            background-color: #10b981;
+            background-color: var(--primary-color);
             color: #ffffff;
             border: none;
             padding: 15px 15px;
@@ -190,4 +193,106 @@
             display: flex;
             flex-direction: column;
             gap: 5px;
+        }
+
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 700px;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        pre {
+            background: #1e293b;
+            color: #f8fafc;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+
+
+
+
+        /* Mobile responsive sidebar */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                /* stack sidebar on top */
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid #e5e7eb;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                position: relative;
+            }
+
+
+            .sidebar h2 {
+                margin-bottom: 10px;
+            }
+
+            .search-box {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .sidebar ul {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .sidebar ul li {
+                margin-bottom: 0;
+            }
+
+            .sidebar ul li a {
+                padding: 8px 12px;
+            }
+
+            .main-content {
+                padding: 20px;
+                width: 100%;
+                position: relative;
+            }
+        }
+
+        input[name="request"] {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid var(--primary-color);
+            border-radius: 6px;
+            font-size: 1rem;
         }

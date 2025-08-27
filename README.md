@@ -1,21 +1,22 @@
+# swt-documentation
+
+**swt-documentation** is a modern, user-friendly API documentation generator, inspired by Swagger. It allows developers to quickly set up beautiful, interactive documentation for their APIs with minimal configuration. Perfect for teams who want a clean, easy-to-use interface for their endpoints.
 
 ---
 
-````markdown
-# swt-documentation
-
-**swt-documentation** is a modern, user-friendly API documentation generator, similar to Swagger. It allows developers to quickly set up beautiful, interactive documentation for their APIs with minimal configuration. Perfect for teams who want a clean, easy-to-use interface for their endpoints.
-
 ## Features
 
-- Easy to set up and integrate with your project
-- Dynamic rendering of endpoints, requests, and responses
+- Easy to set up using a CLI
+- Dynamic rendering of API endpoints, requests, and responses
 - Supports **success** and **error responses**
 - Sidebar navigation with category filtering
-- Searchable API categories
+- Searchable API categories and requests
 - Optional Authorization display
 - Fully responsive and mobile-friendly design
-- Smooth scrolling to API sections
+- Smooth scrolling to selected API sections
+- Internal locked CSS and JS (users can edit `global.css` and `endpoints.json`)
+
+---
 
 ## Installation
 
@@ -24,22 +25,48 @@ Install via npm:
 ```bash
 npm install swt-documentation
 npx swt-docs
-````
+```
+
+This will create a `documentation` folder in your project containing:
+
+* `global.css` → editable CSS for customizing styles
+* `endpoints.json` → editable file for your API endpoints
+
+---
 
 ## Usage
 
-1. Import the package and include it in your project:
+### 1. Serve your docs in a Node.js project
 
 ```js
-import "swt-documentation";
+#!/usr/bin/env node
+import express from "express";
+import { serveDocs } from "swt-documentation";
+
+const app = express();
+
+// Serve documentation at /docs
+serveDocs(app, "/docs");
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Documentation available at http://localhost:${PORT}/docs`);
+});
 ```
 
-2. Create a `endpoints.json` file in your project root:
+> `serveDocs(app, "/docs")` serves the documentation at the route `/docs`. You can change the route if needed.
+
+---
+
+### 2. Configure `endpoints.json`
+
+This is where you define your API endpoints. Example:
 
 ```json
 {
   "meta": {
     "title": "Documentation By SWT",
+    "header": "Backend API Documentation By SWT",
     "description": "AI-native, beautiful API documentation made easy."
   },
   "endpoints": [
@@ -74,57 +101,59 @@ import "swt-documentation";
 }
 ```
 
-3. Add the HTML structure in your page:
-
-```html
-<h1 class="title"></h1>
-<p class="description"></p>
-
-<aside class="sidebar">
-  <h2>Documentation</h2>
-  <div class="search-box">
-    <input type="text" id="search-input" placeholder="Search...">
-  </div>
-  <ul id="category-list"></ul>
-</aside>
-
-<div id="cards-container" class="container"></div>
-```
-
-4. Add the JS script:
-
-```html
-<script src="path/to/swt-documentation.js"></script>
-```
+> Update this file to reflect your API endpoints.
 
 ---
 
-## Live Preview
+### 3. Customize `global.css` (optional)
+
+Edit the `global.css` file in the `documentation` folder to change styles, colors, or fonts.
+
+---
+
+### 4. View your documentation
+
+Start your Node.js app and open in a browser:
+
+```
+http://localhost:5000/docs
+```
+
+* Sidebar shows categories (filterable)
+* Search API requests by title
+* Click an endpoint to see details: request, response, and optional authorization
+* Popup modal for code examples in Node.js, jQuery, Fetch, XMLHttpRequest, Python, etc.
+
+---
+
+### 5. Example Code Popup
+
+Each endpoint has a **Code** button that opens a modal. Users can select from multiple languages:
+
+- Node.js (Axios)
+- jQuery AJAX
+- JavaScript Fetch
+- XMLHttpRequest
+- Python (requests)
+
+The popup automatically renders the corresponding code snippet for the selected language.
+
+---
+
+## Versions
+
+### [1.2.0] - 2025-08-27
+- Added popup code examples for multiple languages
+- Refactored `serveDocs` to fix static file issues
+- Improved sidebar search for categories and endpoints
+
+### [1.1.0] - 2025-08-27
+- Initial release supporting CLI and `serveDocs` integration
+
+---
+
+## Screenshots
 
 Here’s what your documentation will look like once set up:
 
 ![swt-documentation-preview](https://via.placeholder.com/800x400.png?text=swt-documentation+Preview)
-
-* All API endpoints organized by category
-* Requests, responses, and authorization info
-* Filterable sidebar with search
-* Smooth scrolling to selected category
-
----
-
-## Example
-
-```js
-// Example usage in your project
-import "swt-documentation";
-
-// endpoints.json contains all your API endpoints
-// HTML container structure is automatically populated with cards
-```
-
----
-
-
-
-
-

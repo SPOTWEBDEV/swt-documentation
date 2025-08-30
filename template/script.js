@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <span class="api-method">${api.method}</span>
                         <div class="api-path">${api.path}</div>
                         ${api.requestBody && api.requestBody !== '-' ? `<div class="request"><strong>Request:</strong><br>${api.requestBody}</div>` : ''}
-                        ${api.authorization ? `<div class="authorization"><strong>Authorization:</strong><br>Bearer token</div>` : ''}
+                        ${api.authorization ? `<div style="display:flex; align-items:center; gap:10px;color:var(--primary-color)" class="authorization"><strong>Authorization:</strong> Bearer token</div>` : ''}
                         <div class="response success"><strong>Response (Success):</strong><br>${api.responseSuccess}</div>
                         <div class="response error"><strong>Response (Error):</strong><br>${errorHtml}</div>
                         <button onclick='showCodeModal(${JSON.stringify(api)})'>Code</button>

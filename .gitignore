@@ -4,11 +4,13 @@ temp/
 *.tmp
 .DS_Store
 node_modules/
+temp_auto_push.bat
 dist/
 .env
-.vscode/
 node_modules
 documentation
 downloads.js
 vscode/
 package-lock.json
+.gitignore
+temp_interactive_push.bat

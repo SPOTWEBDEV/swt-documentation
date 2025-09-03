@@ -5,7 +5,7 @@
   "main": "lib/serveDocs.js",
   "type": "module",
   "scripts": {
-    "start": "node bin/cli.js"
+    "start": "node api.js && node bin/cli.js"
   },
   "bin": {
     "swt-docs": "./bin/cli.js"
